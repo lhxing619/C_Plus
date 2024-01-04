@@ -54,3 +54,70 @@ char sex;
 
 • 在派生类的构造函数里调用基类的构造函数。
 • 调用基类的构造函数，基类里的参数是实参而非形参。
+
+• 先调用基类的构造函数。
+• 再执行派生类构造函数本身。
+
+也可以在类外定义派生类的构造函数：
+class Student1：public Student
+{ public:
+  Student1(int n, string nam, char s, int a, string ad);   //声明的时候不写基类的构造函数。
+  ~Student1(){}
+  private:
+  int age;
+  string addr;
+};
+
+Student1::Student1(int n, string nam, char s, int a, string ad): Student(n, nam, s)
+{ age =a;
+  addr =ad;
+}
+
+有子对象的派生类的构造函数
+class Student1：public Student
+{ public:
+  Student1(int n, string nam, char s); ~Student1(){}
+  private:
+  Student monitor;
+  string name;
+  char sex;
+};
+• 数据成员为对象。
+• 对象中的对象，称为子对象。
+
+基类的构造函数： Student(int n, string nam);
+class Student1：public Student
+{ public:
+  Student1(int n, string nam, int n1, string nam1, int a, string ad):Student(n, nam), monitor(n1, nam1)
+  { age = a;
+    addr = ad;
+  }
+  private:
+  Student monitor;
+  int age;
+  string addr;
+};
+• 对基类数据成员初始化。
+• 对子对象数据成员初始化。
+• 对派生类数据成员初始化。
+• 基类构造函数和子对象的次序可以任意调换
+
+多层派生时的构造函数
+基类A的构造函数： A(int n, string nam);
+class B：public A
+{ public:
+  B(int n, string nam, int a): A(n, nam)
+  {age = a;}
+  private:
+  int age;
+};
+派生类B的构造函数： B(int n, string nam, int a)；
+class C：public B
+{ public:
+  C(int n, string nam, int a，int s): B(n, nam, a)
+  {score = s;}
+  private:
+  int score;
+};
+• 只需写出上一层派生类的构造函数。不用列出每一层的构造函数。
+• 先初始化A类的数据成员，再初始化B类的数据成员，再初始化C类的数据成员。
