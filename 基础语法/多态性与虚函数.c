@@ -35,3 +35,60 @@ C++的多态性：
 
 p->area()
 程序员：不论对象如何千变万化，调用语句都一样。
+
+从系统实现的角度看，多态性分为：静态多态性和动态多态性。
+ 
+静态多态性    
+ • 程序编译时系统就能知道调用的是哪个函数。
+ • 通过函数重载实现。
+动态多态性
+• 编译时不确定调用哪个函数，运行时才动态地确定对象及其函数。
+• 通过虚函数实现。
+
+ 静态多态性
+ #include <iostream>
+using namespace std;
+int max(int a, int b, int c)
+{ if (b>a) a=b;
+  if (c>a) a=c;
+  return a;
+}
+float max(float a, float b, float c)
+{ if (b>a) a=b;
+  if (c>a) a=c;
+  return a;
+}
+long max(long a, long b, long c)
+{ if (b>a) a=b;
+  if (c>a) a=c;
+  return a;
+}
+int main ( )
+{ 
+  int a, b, c;
+  float d, e, f;
+  long g, h, i;
+  cin >> a >> b >> c;
+  cin >> d >> e >> f;
+  cin >> g >> h >> i;
+  int m;
+  m=max(a,b,c);
+  cout << “max_i =” <<m<<endl;
+  float n;
+  n=max(d,e,f);
+  cout << “max_f =” <<n<<endl;
+  long int p;
+  p=max(g,h,i);
+  cout << “max_l =” <<p<<endl;
+  return 0;
+}
+
+
+
+
+
+
+
+
+
+
