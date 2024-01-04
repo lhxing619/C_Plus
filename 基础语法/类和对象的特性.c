@@ -24,36 +24,40 @@ float *p=new float(3.14159),
 第二步：声明类，将与之有关的数据和函数封装进来。
 第三步：定义类的成员函数。
 第四步：在主函数中完成对类的对象的调用。
+
 #include <iostream>
 using namespace std;
 class Array_max
 { public:
-void set_value();
-void max_value();
-void show_value();
-private:
-int array[10];
-int max;
+  void set_value();
+  void max_value();
+  void show_value();
+  private:
+  int array[10];
+  int max;
 };
 
 void Array_max::set_value()
-{ int i;
-for(i=0; i<10;i++)
-cin>>array[i];
+{ 
+  int i;
+  for(i=0; i<10;i++)
+  cin>>array[i];
 }
 
 void Array_max::max_value()
-{ int i;
-max=array[0];
-for(i=0; i<10;i++)
-if(array[i]>max)max=array[i];
+{ 
+  int i;
+  max=array[0];
+  for(i=0; i<10;i++)
+  if(array[i]>max)max=array[i];
 }
 void Array_max::show_value()
-{ cout<<“max = ”<<max;}
-int main( )
-{Array_max arrmax; //定义对象
-arrmax.set_value(); //调用对象的公用成员函数
-arrmax.max_value(); //调用对象的公用成员函数
-arrmax.show_value(); //调用对象的公用成员函数
-return 0;
+{ 
+  cout<<“max = ”<<max;}
+  int main( )
+  {Array_max arrmax; //定义对象
+  arrmax.set_value(); //调用对象的公用成员函数
+  arrmax.max_value(); //调用对象的公用成员函数
+  arrmax.show_value(); //调用对象的公用成员函数
+  return 0;
 }
