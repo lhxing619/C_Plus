@@ -15,61 +15,67 @@
 • 不是声明类时赋值，而是调用构造函数时才执行这些赋值语句。
 • 构造函数不能被用户调用。t1.Time(); //错误
 • 可以用一个类对象初始化另一个类对象。
+
 #include <iostream>
 using namespace std;
 class Time
 { public:
-Time( );
-void show_time();
-private:
-int hour;
-int minute;
-int sec;
+  Time( );
+  void show_time();
+  private:
+  int hour;
+  int minute;
+  int sec;
 };
 
 Time :: Time( )
-{hour=0;
-minute=0;
-sec=0;
+{
+  hour=0;
+  minute=0;
+  sec=0;
 }
 
 int main()
-{ Time t1;
-Time t2=t1;
-t2.show_time();
-return 0;
+{ 
+  Time t1;
+  Time t2=t1;
+  t2.show_time();
+  return 0;
 }
 
 • 在函数体中赋初值: 每个对象的数据成员初值相同。
 • 带参数的构造函数: 可以给不同对象不同的初值。
 class Box
-{ public:
-Box(int, int, int);
-int volume();
-private:
-int length;
-int width;
-int height;
+{ 
+  public:
+  Box(int, int, int);
+  int volume();
+  private:
+  int length;
+  int width;
+  int height;
 };
 Box :: Box( int h, int w, int len)
-{height=h;
-width=w;
-length=len;
+{
+  height=h;
+  width=w;
+  length=len;
 }
 构造函数是不能被调用的，如何把实参传递给构造函数？
 在定义对象时给出实参：
 类名 对象名( 实参1，实参2， …)
 int main()
 {
-Box box1(12, 25, 30);
-Box box2(15, 30, 21); …
+  Box box1(12, 25, 30);
+  Box box2(15, 30, 21); …
 }
 先把实参传递给对象，对象调用构造函数时再传递实参给构造函数。
 用参数初始化表对数据成员初始化
 Box :: Box( int h, int w, int len)
-{height=h;
-width=w;
-length=len;
+{
+  height=h;
+  width=w;
+  length=len;
 }
 Time:: Time(int h, int m, int s): hour(h), minute(m), sec(s){ }
 
@@ -79,25 +85,28 @@ Time:: Time(int h, int m, int s): hour(h), minute(m), sec(s){ }
 using namespace std;
 class Rectangle
 { public:
-Rectangle ( );
-Rectangle (int len, int wid);
-int area()
-{return (length*width);}
-private:
-int length, width;
+  Rectangle ( );
+  Rectangle (int len, int wid);
+  int area()
+  {return (length*width);}
+  private:
+  int length, width;
 };
 Rectangle::Rectangle( )
 {length =10; width =10;}
+
 Rectangle::Rectangle(int len, int wid)
 {length =len; width =wid;}
+
 int main( )
-{Rectangle rec1;
-cout<<“The area of Rectangle 1 is ”;
-cout<<rec1.area()<<endl;
-Rectangle rec2(15,20);
-cout<<“The area of Rectangle 2 is ”;
-cout<<rec2.area()<<endl;
-return 0;
+{ 
+  Rectangle rec1;
+  cout<<“The area of Rectangle 1 is ”;
+  cout<<rec1.area()<<endl;
+  Rectangle rec2(15,20);
+  cout<<“The area of Rectangle 2 is ”;
+  cout<<rec2.area()<<endl;
+  return 0;
 }
 The area of Rectangle 1 is 100
 The area of Rectangle 1 is 300
@@ -110,35 +119,31 @@ The area of Rectangle 1 is 300
 using namespace std;
 class Student
 { public:
-Student (int n, string nam, char s)
-{ num =n;
-  name = nam;
-  sex = s;
-cout<< “constructor called.”<<endl;
+  Student (int n, string nam, char s)
+  { num =n;
+    name = nam;
+    sex = s;
+  cout<< “constructor called.”<<endl;
 }
 ~Student()
-{cout<< “ Destructor called.”<<endl;}
-void display()
-{cout<<“num:”<<num<<endl;
-cout<<“name:”<<name<<endl;
-cout<<“sex:”<<sex<<endl;}
-private:
-int num;
-char name[10];
-char sex;
+{
+  cout<< “ Destructor called.”<<endl;}
+  void display()
+  {cout<<“num:”<<num<<endl;
+  cout<<“name:”<<name<<endl;
+  cout<<“sex:”<<sex<<endl;}
+  private:
+  int num;
+  char name[10];
+  char sex;
 };
 int main( )
-{ Student stud1(10010,
-“Wang_Li”
-,
-‘f’);
-stud1.display();
-Student stud2(10011,
-“Zhang_fan”
-,
-‘m’);
-stud2.display();
-return 0;
+{ 
+  Student stud1(10010,“Wang_Li”,‘f’);
+  stud1.display();
+  Student stud2(10011,“Zhang_fan”,‘m’);
+  stud2.display();
+  return 0;
 }
 先构造的后析构
 后构造的先析构
@@ -149,49 +154,53 @@ return 0;
 using namespace std;
 class Box
 { public:
-Box (int h =10, int w=12, int len =15): height(h), width(w), length(len) {}
-int volume();
-private:
-int height;
-int width;
-int length;
+  Box (int h =10, int w=12, int len =15): height(h), width(w), length(len) {}
+  int volume();
+  private:
+  int height;
+  int width;
+  int length;
 };
 int Box::volume()
-{ return (height*width*length);
+{ 
+  return (height*width*length);
 }
 int main( )
-{ Box a[3] = {
-Box(10, 12, 15),
-Box(15, 18, 20),
-Box(16, 20, 26)
-};
-cout <<“volume of a[0] is ” << a[0].volume()<<endl;
-cout <<“volume of a[1] is ” << a[1].volume()<<endl;
-cout <<“volume of a[2] is ” << a[2].volume()<<endl;
-return 0;
+{ 
+  Box a[3] = {
+  Box(10, 12, 15),
+  Box(15, 18, 20),
+  Box(16, 20, 26)
+  };
+  cout <<“volume of a[0] is ” << a[0].volume()<<endl;
+  cout <<“volume of a[1] is ” << a[1].volume()<<endl;
+  cout <<“volume of a[2] is ” << a[2].volume()<<endl;
+  return 0;
 }
 
 指向对象的指针
 class Time
 { public:
-int hour;
-int minute;
-int sec;
-void get_time();
+  int hour;
+  int minute;
+  int sec;
+  void get_time();
 };
 void Time::get_time()
-{cout<< hour <<“:” << minute
-<<“:”<<sec<<endl;}
-Time *pt;
-Time t1;
-pt = &t1;
+{
+  cout<< hour <<“:” << minute<<“:”<<sec<<endl;
+}
 
-t1.hour
-t1.get_time()
-pt ->hour
-pt->get_time()
-(*pt).hour
-(*pt).get_time()
+  Time *pt;
+  Time t1;
+  pt = &t1;
+
+  t1.hour
+  t1.get_time()
+  pt ->hour
+  pt->get_time()
+  (*pt).hour
+  (*pt).get_time()
 
 用对象指针方法输出时、分、秒。
 #include <iostream>
