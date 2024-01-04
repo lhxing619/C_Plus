@@ -207,30 +207,34 @@ void Time::get_time()
 using namespace std;
 class Time
 { public:
-Time(int, int, int);
-int hour;
-int minute;
-int sec;
-void get_time();
+  Time(int, int, int);
+  int hour;
+  int minute;
+  int sec;
+  void get_time();
 };
 Time::Time(int h, int m, int s)
-{ hour=h;
-minute=m;
-sec=s;
+{ 
+  hour=h;
+  minute=m;
+  sec=s;
 }
 void Time::get_time( )
-{ cout << hour << “:” << minute << “:” << sec << endl;}
+{ 
+  cout << hour << “:” << minute << “:” << sec << endl;
+}
 int main()
-{ Time t1(10, 13, 56);
-int *p1=&t1.hour;
-cout << *p1<< endl;
-t1.get_time( );
-Time *p2 =&t1;
-p2->get_time( );
-void(Time::*p3)();
-p3=&Time::get_time;
-(t1.*p3)( );
-return 0;
+{ 
+  Time t1(10, 13, 56);
+  int *p1=&t1.hour;
+  cout << *p1<< endl;
+  t1.get_time( );
+  Time *p2 =&t1;
+  p2->get_time( );
+  void(Time::*p3)();
+  p3=&Time::get_time;
+  (t1.*p3)( );
+  return 0;
 };
 
 对象指针
@@ -248,12 +252,13 @@ Box box2(box1);            调用复制构造函数Box( const Box&)
 静态数据成员的存储空间与对象的空间是互相独立的。
 静态数据成员
 class Box
-{ public:
-int volume();
-private:
-static int length;
-int width;
-int height;
+{ 
+public:
+  int volume();
+  private:
+  static int length;
+  int width;
+  int height;
 };
 int Box:: length =10;
 • 只能在类体外初始化此时不加static
@@ -264,37 +269,40 @@ int Box:: length =10;
 using namespace std;
 class Box
 { public:
-Box(int, int);
-int volume();
-static int height;
-int length;
-int width;
+  Box(int, int);
+  int volume();
+  static int height;
+  int length;
+  int width;
 };
 Box::Box(int w, int len)
 {width =w; length=len;}
 int Box::volume( )
 {return (width*length*height);}
 int Box::height = 10;
+
 int main( )
-{Box a(15,20), b(20,30);
-cout <<a.height<<endl;
-cout <<b.height<<endl;
-cout <<Box:: height<<endl; …
+{
+  Box a(15,20), b(20,30);
+  cout <<a.height<<endl;
+  cout <<b.height<<endl;
+  cout <<Box:: height<<endl; …
 }
 
 静态成员函数
 class Box
 { public:
-static int volume( );
-private:
-static int length;
-int width;
-int height;
+    static int volume( );
+    private:
+    static int length;
+    int width;
+    int height;
 };
 int main( )
-{Box a(15,20); …
-cout <<Box:: volume( )<<endl;
-cout <<a.volume( )<<endl; …
+{
+  Box a(15,20); …
+  cout <<Box:: volume( )<<endl;
+  cout <<a.volume( )<<endl; …
 }
 
 静态成员函数与普通的成员函数有什么区别?
@@ -303,23 +311,26 @@ cout <<a.volume( )<<endl; …
 
 统计学生平均成绩，使用静态成员函数。
 class Student
-{ public:
-void total( );
-static float average( );
-private:
-static int count;
-static float sum;
-int num;
-int age;
-float score;
+{ 
+public:
+  void total( );
+  static float average( );
+  private:
+  static int count;
+  static float sum;
+  int num;
+  int age;
+  float score;
 };
 void Student::total( )
-{sum+=score;
-count++;
+{
+  sum+=score;
+  count++;
 }
 只访问静态数据成员
 float Student::average( )
-{return (sum/count);
+{
+  return (sum/count);
 }
 静态成员函数是为了处理本类所有对象的共性问题的。
 使用静态成员函数的好处：它跟类的实例无关，只跟类有关，不需要this指针。因此，调用方便，不需要生成对象就能调用。
@@ -333,41 +344,48 @@ using namespace std;
 class Date; //提前引用声明
 class Time
 { public:
-Time(int, int, int);
-void display(Date &);
-private:
-int hour;
-int minute;
-int sec;
+    Time(int, int, int);
+    void display(Date &);
+    private:
+    int hour;
+    int minute;
+    int sec;
 };
 class Date
 { public:
-Date (int, int, int);
-friend void Time::display(Date &);
-private:
-int month;
-int day;
-int year;
+    Date (int, int, int);
+    friend void Time::display(Date &);
+    private:
+    int month;
+    int day;
+    int year;
 };
+
 Time::Time(int h, int m, int s)
-{ hour =h;
-minute = m;
-sec = s;
+{ 
+    hour =h;
+    minute = m;
+    sec = s;
 }
+
 void Time::display(Date& d)
-{cout<<d.month<<“/”<<d.day<<“/”<<d.year<<endl;
-cout<<hour<<“:”<<minute<<“:”<<sec<<endl;
+{
+  cout<<d.month<<“/”<<d.day<<“/”<<d.year<<endl;
+  cout<<hour<<“:”<<minute<<“:”<<sec<<endl;
 }
+
 Date::Date(int m, int d, int y)
-{ month =m;
-day = d;
-year = y;
+{ 
+    month =m;
+    day = d;
+    year = y;
 }
 int main()
-{ Time t1(10, 13, 56);
-Date d1(12, 25, 2004);
-t1.display(d1);
-return 0;
+{ 
+  Time t1(10, 13, 56);
+  Date d1(12, 25, 2004);
+  t1.display(d1);
+  return 0;
 };
 
 12/25/2004
