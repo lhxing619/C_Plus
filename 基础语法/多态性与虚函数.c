@@ -72,7 +72,7 @@ int main ( )
   cin >> d >> e >> f;
   cin >> g >> h >> i;
   int m;
-  m=max(a,b,c);
+  m=max(a,b,c);       //运行之前就知道要调用哪个函数。
   cout << “max_i =” <<m<<endl;
   float n;
   n=max(d,e,f);
@@ -83,10 +83,47 @@ int main ( )
   return 0;
 }
 
+动态多态性
+程序运行中，才知道p指向的对象，从而确定要调用的是哪个area()。
 
+area()        area()           area()
+t.area()      s.area()       c.area()
+并没有达到要求：没有实现一个相同的调用语句，可以调用不同对象的area()。
 
+1.使这三个类来自于同一个基类
+2.在基类中也定义同名函数area()。
 
+利用虚函数实现动态多态性
+基类与派生类中有同名函数。
 
+ 基类Student    派生类Graduate
+class Student
+{ public:
+  Student(int, string, float);
+  void display();
+  protected:
+  int num;
+  string name;
+  float score;
+};
+
+class Graduate:public Student
+{ public:
+  Graduate(int, string, float, float);
+  void display();
+  private:
+  float wage;
+};
+
+int main()
+{ Student stud1(1001,“Li”  , 87.5);
+  Graduate grad1(2001,  “Wang”  , 98.5, 1200);
+  Student *pt=&stud1;
+  pt->display();
+  pt = &grad1;
+  pt->display();
+  return 0;
+};
 
 
 
