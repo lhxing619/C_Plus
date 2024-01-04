@@ -119,12 +119,58 @@ int main()
 { Student stud1(1001,“Li”  , 87.5);
   Graduate grad1(2001,  “Wang”  , 98.5, 1200);
   Student *pt=&stud1;
+  pt->display();  //pt调用的是基类对象的display
+  pt = &grad1;
+  pt->display();  //希望pt调用的是派生类对象的display，但实际上并没有输出派生类新增成员的值
+  return 0;
+};
+
+int main()
+{ Student stud1(1001, “Li”, 87.5);
+  Graduate grad1(2001, “Wang”, 98.5, 1200);
+  Student *pt=&stud1;
+  pt->display();
+  Graduate *pt1 = &grad1;
+  pt1->display();
+  return 0;
+};
+
+
+p->area() 虚函数
+
+ 
+class Student
+{ public:
+  Student(int, string, float);
+  virtual void display();
+  protected:
+  int num;
+  string name;
+  float score;
+};
+class Graduate:public Student
+{ public:
+  Graduate(int, string, float, float);
+  void display();
+  private:
+  float wage;
+};
+
+int main()
+{ Student stud1(11,“Li”, 87.5);
+  Graduate grad1(21,“Liu”, 98.5, 12);
+  Student *pt=&stud1;
   pt->display();
   pt = &grad1;
   pt->display();
   return 0;
 };
 
+• 在基类中用virtual声明成员函数为虚函数。在类外定义时，不必再加virtual。
+• 在派生类中重新定义虚函数，函数名、函数类型、函数参数个数及类型都必须与基类的虚函数相同。
+• 只能用virtual声明类的成员函数，作为虚函数，不能将类外的普通函数声明为虚函数。
+• 定义一个指向基类对象的指针。
+• 通过虚函数与指向基类对象的指针变量的配合使用，就能实现动态的多态性。
 
 
 
