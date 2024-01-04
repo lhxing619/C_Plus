@@ -121,3 +121,85 @@ class C：public B
 };
 • 只需写出上一层派生类的构造函数。不用列出每一层的构造函数。
 • 先初始化A类的数据成员，再初始化B类的数据成员，再初始化C类的数据成员。
+
+派生类的析构函数
+构造时：
+1.调用基类构造函数
+2.调用子对象构造函数 
+3.初始化派生类自己的新增成员
+析构时：
+1.调用派生类自己的析构函数
+2.调用子对象的析构函数
+3.调用基类的析构函数
+
+
+多重继承
+多重继承：一个派生类有多个基类
+声明多重继承的方法：
+class D：public A, private B, protected C
+{新增加的成员}；
+声明多重继承的方法：
+
+多重继承派生类的构造函数
+基类A的构造函数： A(string nam， int a, string t);
+基类B的构造函数： B(char s, float sco);
+class C：public A, public B
+{ public:
+  C(string nam, int a, string t, char s, float sco, float w): A(nam, a, t), B(s, sco){ wage=w; }
+  private:
+  float wage;
+};
+
+多重继承引起的二义性问题
+两个基类中有同名成员：
+A类:
+  int a;
+  void display();
+B类:
+  int a;
+  void display();
+C类:
+  int a;
+  void display();
+  int a;
+  void display();
+  int b;
+  void show();
+
+C c1;
+c1.a=3;
+c1.display();   //错误
+
+C c1;
+c1.A : : a=3;
+c1.A : : display();
+c1.B : : a=5;
+c1.B : : display();  //正确
+
+C c1;
+c1.a=3;  
+c1.display();//访问的是C类的成员
+
+c1.A : : a=3;
+c1.A : : display(); //访问的是A类的成员
+
+c1.B : : a=5;
+c1.B : : display();   //访问的是B类的成员
+
+虚基类
+如果不希望在派生类中保留间接共同基类的多个同名成员， C++提供虚基类的方法，使得在继承
+间接共同基类时只保留一份成员。
+
+虚基类
+class B: virtual public A
+{…};
+class C: virtual public A
+{…};
+class A
+{…};
+class D: public B, public C
+{…};
+
+虚基类
+为了保证虚基类在派生类中只继承一次，应当在该基类的所有直接派生类中声明为虚基类。否则仍然会出
+现对基类的多次继承。
